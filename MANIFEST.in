@@ -1,0 +1,11 @@
+recursive-include contracts *.json *.proto *.mjs *.js *.ts
+recursive-include device-library *.json *.md
+recursive-include tests *.py *.json
+include requirements-codegen.txt
+include requirements-test.txt
+include packages/public-sdk/package.json
+include packages/public-sdk/package-lock.json
+recursive-include packages/public-sdk/scripts *.mjs
+recursive-include scripts *.py *.mjs
+include requirements-runtime.lock
+include requirements-build.lock

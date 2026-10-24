@@ -1,0 +1,24 @@
+{
+  "remote_whole_files": [
+    "test_ci_pytest_imports.py",
+    "test_installed_package_probe.py",
+    "test_release_entrypoint.py",
+    "test_release_workflows.py"
+  ],
+  "consumer_functions": {
+    "test_generated_python.py": [
+      "test_api_mounted_version_retains_legacy_exact_integer_rule"
+    ],
+    "test_flexible_mounting.py": [
+      "test_body_pose_does_not_change_connectivity_and_reanchor_changes_one_binding",
+      "test_versioned_typed_simulation_accepts_graph_12_without_widening_legacy_request"
+    ],
+    "test_fpga_proposal_mapping.py": [
+      "test_current_mapping_is_explicit_about_independent_open_hardware_gates",
+      "test_scaffold_and_sampled_helpers_do_not_enable_an_absent_physical_producer"
+    ],
+    "test_package_build.py": [
+      "test_verification_toolchain_satisfies_every_no_isolation_build_requirement"
+    ]
+  }
+}

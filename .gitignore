@@ -1,0 +1,6 @@
+.build/
+node_modules/
+packages/public-sdk/dist/
+__pycache__/
+.pytest_cache/
+*.py[cod]

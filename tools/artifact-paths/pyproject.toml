@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools==84.0.0", "wheel==0.47.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "netcircuit-artifact-paths"
+version = "1.0.0a1"
+description = "Standalone development artifact allocator with one Node policy and a Python bridge"
+requires-python = ">=3.11"
+license-files = ["LICENSE"]
+
+[tool.setuptools]
+packages = ["netcircuit_artifact_paths"]
+
+[tool.setuptools.package-data]
+netcircuit_artifact_paths = ["*.mjs"]

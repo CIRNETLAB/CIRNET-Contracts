@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools==84.0.0", "grpcio-tools==1.84.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "netcircuit-contracts"
+version = "1.0.1"
+requires-python = ">=3.11"
+license-files = ["LICENSE"]
+dependencies = ["jsonschema==4.26.0", "referencing==0.37.0", "pydantic==2.14.1"]
+
+[project.optional-dependencies]
+rpc = ["grpcio==1.84.0", "protobuf==7.36.2"]
+codegen = ["datamodel-code-generator==0.84.0", "grpcio-tools==1.84.0", "build==1.4.0", "wheel==0.47.0"]
+
+[tool.setuptools.packages.find]
+include = ["contracts*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+contracts = ["*.json", "api/*.json", "assignment/*.json", "capture/*.json", "physical-lab/*.json", "physical-lab/examples/*.json", "circuit-schema/*.json", "circuit-schema/examples/*.json", "memory/*.json", "design-models/*.json", "design-models/fixtures/*.json", "design/*.json", "public/*.json", "fixtures/*.json", "fixtures/capture/*.json", "hardware/v2/*.proto", "fpga-protocol/*.json", "compatibility/*/*.json", "compatibility/*/*/*.json", "compatibility/*/hardware/v2/*.proto"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/contracts", "tests/test_standalone_distribution.py"]
+addopts = "-p no:cacheprovider"

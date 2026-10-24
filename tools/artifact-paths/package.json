@@ -1,0 +1,14 @@
+{
+  "name": "@tinihi-labs/artifact-paths",
+  "version": "1.0.0-m1.0",
+  "description": "Standalone NetCircuit verification artifact allocator dev tooling",
+  "type": "module",
+  "license": "SEE LICENSE IN LICENSE",
+  "engines": { "node": ">=22" },
+  "exports": {
+    ".": { "types": "./artifact-paths.d.mts", "import": "./artifact-paths.mjs" }
+  },
+  "bin": { "netcircuit-artifact-paths": "./artifact-paths.mjs" },
+  "files": ["artifact-paths.mjs", "artifact-paths.d.mts", "netcircuit_artifact_paths/*.mjs", "README.md", "LICENSE"],
+  "scripts": { "test": "node --test test/artifact-paths.test.mjs" }
+}
