@@ -2,7 +2,8 @@
 
 Public netCIRCUIT DTOs, operation metadata, capture-layout constants, precompiled
 offline structural/editor/transport validators, catalog projections and fixtures.
-Version 0.1.1 is a migration candidate; no registry publication is implied.
+Release version 0.1.1 together with the exact Contracts Python artifact set.
+Use the immutable release archive and SHA256 recorded in the system manifest.
 
 Use the root exports for DTO types and metadata, `./validators` for transport,
 `./validators.editor` and `./validators.structural` for the other full profiles.

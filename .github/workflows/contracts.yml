@@ -17,8 +17,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: npm
-          cache-dependency-path: packages/public-sdk/package-lock.json
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
@@ -32,6 +30,8 @@ jobs:
           echo "TMP=$artifact_session" >> "$GITHUB_ENV"
           echo "TEMP=$artifact_session" >> "$GITHUB_ENV"
           echo "TMPDIR=$artifact_session" >> "$GITHUB_ENV"
+          echo "PIP_CACHE_DIR=$artifact_session/pip-cache" >> "$GITHUB_ENV"
+          echo "npm_config_cache=$artifact_session/npm-cache" >> "$GITHUB_ENV"
           echo "PYTHONDONTWRITEBYTECODE=1" >> "$GITHUB_ENV"
           echo "NETCIRCUIT_ARTIFACT_PATHS_MODULE=$(node --input-type=module -e 'import {resolve} from "node:path"; import {pathToFileURL} from "node:url"; console.log(pathToFileURL(resolve("tools/artifact-paths/netcircuit_artifact_paths/artifact-paths.mjs")).href)')" >> "$GITHUB_ENV"
       - name: Install pinned verification tools and independent allocator

@@ -1,11 +1,14 @@
 # netCIRCUIT Contracts
 
-Standalone migration candidate **0.1.1**, extracted from Remote revision
+Standalone product release **0.1.1**, originally extracted from Remote revision
 `295797c`. The Python distribution is `netcircuit-contracts`; its import
 namespace remains `contracts`. The browser package is `@tinihi-labs/contracts`.
 Schemas, revisions, protocol versions, frozen wire anchors and public operation
-semantics retain their existing meaning. This candidate is not a published
-release and does not establish package-registry access or physical support.
+semantics retain their existing meaning. Build from a clean committed revision,
+verify the standalone and integrated gates, then publish immutable `v0.1.1`
+release artifacts with exact SHA256 and source provenance. Publication and
+consumer access are recorded in the system release manifest; package checks
+do not establish physical support.
 
 Python runtime requires 3.11+. Generator CI uses Python 3.12 and Node 22.
 For reproducible CI/release verification, install the complete `requirements-build.lock` with `pip --require-hashes` from a reviewed wheelhouse; `requirements-runtime.lock` independently pins the full runtime closure for Python 3.11/3.12 on Windows AMD64 and Linux x86_64. Install `tools/artifact-paths` with `--no-index --no-build-isolation --no-deps` after the locked build tools. The standalone workflow records the exact offline commands. Then run `npm ci --no-audit --no-fund` in
