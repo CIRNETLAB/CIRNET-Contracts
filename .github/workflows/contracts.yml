@@ -26,6 +26,7 @@ jobs:
         shell: bash
         run: |
           artifact_session="$(node tools/artifact-paths/artifact-paths.mjs)"
+          export NETCIRCUIT_ARTIFACTS_SESSION="$artifact_session"
           echo "NETCIRCUIT_ARTIFACTS_SESSION=$artifact_session" >> "$GITHUB_ENV"
           echo "TMP=$artifact_session" >> "$GITHUB_ENV"
           echo "TEMP=$artifact_session" >> "$GITHUB_ENV"
@@ -33,6 +34,9 @@ jobs:
           echo "PIP_CACHE_DIR=$artifact_session/pip-cache" >> "$GITHUB_ENV"
           echo "npm_config_cache=$artifact_session/npm-cache" >> "$GITHUB_ENV"
           echo "PYTHONDONTWRITEBYTECODE=1" >> "$GITHUB_ENV"
+          allocator_scratch="$(node tools/artifact-paths/artifact-paths.mjs allocator-tests)"
+          echo "ALLOCATOR_TEST_SOURCE=$GITHUB_WORKSPACE" >> "$GITHUB_ENV"
+          echo "ALLOCATOR_TEST_SCRATCH=$allocator_scratch" >> "$GITHUB_ENV"
           echo "NETCIRCUIT_ARTIFACT_PATHS_MODULE=$(node --input-type=module -e 'import {resolve} from "node:path"; import {pathToFileURL} from "node:url"; console.log(pathToFileURL(resolve("tools/artifact-paths/netcircuit_artifact_paths/artifact-paths.mjs")).href)')" >> "$GITHUB_ENV"
       - name: Install pinned verification tools and independent allocator
         run: |
