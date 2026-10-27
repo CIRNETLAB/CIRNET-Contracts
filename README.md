@@ -68,8 +68,9 @@ FastAPI registrations in Remote remain the operation authority.
 independently editable route model. Generate prerelease schema packages, export
 OpenAPI from Remote on that candidate, review/freeze the document, build final
 artifacts, then require Remote re-export on the exact final wheel to equal the
-frozen bytes. Python/npm distribution version 0.1.1 does not change OpenAPI
-application-info version, schema versions, Hardware RPC or NCAP versions.
+frozen bytes. For the M6 release, Python/npm distribution versions and the Remote API
+application-info version align at 0.1.1. CircuitGraph/schema versions, Hardware
+RPC, NCAP and other wire protocol versions remain unchanged.
 
 `contracts/fingerprints.json` records separate canonical-source/public-schema/
 OpenAPI fingerprints. Release artifact digests are recorded externally by the
