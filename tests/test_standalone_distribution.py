@@ -17,12 +17,20 @@ def test_distribution_has_no_consumer_source_and_separate_public_package():
     assert (ROOT / 'pyproject.toml').is_file(), 'Standalone Python distribution is missing'
     python = tomllib.loads((ROOT / 'pyproject.toml').read_text(encoding='utf-8'))
     assert python['project']['name'] == 'netcircuit-contracts'
-    assert python['project']['version'] == '1.0.1'
+    assert python['project']['version'] == '0.1.1'
     for path in ('apps', 'services', 'simulator'):
         assert not (ROOT / path).exists(), path
     npm = json.loads((ROOT / 'packages/public-sdk/package.json').read_text())
-    assert npm['name'] == '@tinihi-labs/contracts' and npm['version'] == '1.0.1'
+    assert npm['name'] == '@tinihi-labs/contracts' and npm['version'] == '0.1.1'
     assert npm['files'] == ['dist']
+
+
+def test_compatibility_export_requires_explicit_destination(monkeypatch):
+    from contracts.codegen import generate_contracts
+    monkeypatch.setattr(generate_contracts, '_publish_bytes', lambda *args: None)
+    export_artifacts = generate_contracts.export_artifacts
+    with pytest.raises(TypeError, match='output_root'):
+        export_artifacts()
 
 
 def test_prebuilt_export_preserves_frozen_browser_and_python_artifacts(tmp_path):

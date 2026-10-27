@@ -1,6 +1,6 @@
 # netCIRCUIT Contracts
 
-Standalone migration candidate **1.0.1**, extracted from Remote revision
+Standalone migration candidate **0.1.1**, extracted from Remote revision
 `295797c`. The Python distribution is `netcircuit-contracts`; its import
 namespace remains `contracts`. The browser package is `@tinihi-labs/contracts`.
 Schemas, revisions, protocol versions, frozen wire anchors and public operation
@@ -43,8 +43,9 @@ holds the retained lab compatibility facade. The explicit
 `contracts/browser/artifacts.json` maps legacy Remote/Web snapshot paths to
 installed package resources. `contracts.resources.generated_artifacts()` reads
 those resources without importing or searching for a consumer implementation.
-`contracts.codegen.generate_contracts.export_artifacts()` compares/exports that
-immutable handoff. Consumers must not regenerate it from retained source.
+`contracts.codegen.generate_contracts.export_artifacts(output_root=...)` compares/exports
+that immutable handoff into an explicit destination. Legacy `apps/web` paths are
+export format keys only; generation never discovers or writes another checkout. Consumers must not regenerate it from retained source.
 
 The npm tarball includes only built public resources under `dist`. Public schema
 bundles use the registry's public-reference closure; public profile overrides
@@ -67,7 +68,7 @@ FastAPI registrations in Remote remain the operation authority.
 independently editable route model. Generate prerelease schema packages, export
 OpenAPI from Remote on that candidate, review/freeze the document, build final
 artifacts, then require Remote re-export on the exact final wheel to equal the
-frozen bytes. Python/npm distribution version 1.0.1 does not change OpenAPI
+frozen bytes. Python/npm distribution version 0.1.1 does not change OpenAPI
 application-info version, schema versions, Hardware RPC or NCAP versions.
 
 `contracts/fingerprints.json` records separate canonical-source/public-schema/

@@ -83,8 +83,8 @@ def _publish_bytes(artifacts, output_root, check):
         publish_artifacts(sources, output_root)
 
 
-def export_artifacts(*, check=False, output_root=ROOT):
-    """Read the installed projections; never regenerate from consumer source."""
+def export_artifacts(*, output_root, check=False):
+    """Export installed projections to an explicit destination; never regenerate."""
     _publish_bytes(generated_artifacts(), output_root, check)
 
 

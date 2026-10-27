@@ -10,7 +10,7 @@ def main():
     assert sys.flags.isolated == 1, 'Use python -I for the installed-wheel probe.'
     import contracts
     distribution = importlib.metadata.distribution('netcircuit-contracts')
-    assert distribution.version == '1.0.1'
+    assert distribution.version == '0.1.1'
     package = Path(distribution.locate_file('contracts/__init__.py')).resolve().parent
     assert Path(contracts.__file__).resolve().parent == package
     assert Path(str(importlib.resources.files('contracts'))).resolve() == package

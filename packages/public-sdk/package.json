@@ -1,6 +1,6 @@
 {
   "name": "@tinihi-labs/contracts",
-  "version": "1.0.1",
+  "version": "0.1.1",
   "license": "SEE LICENSE IN LICENSE",
   "description": "Public netCIRCUIT DTOs, offline validators and versioned resources",
   "type": "module",

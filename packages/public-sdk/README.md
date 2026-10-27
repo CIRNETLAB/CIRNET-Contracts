@@ -2,7 +2,7 @@
 
 Public netCIRCUIT DTOs, operation metadata, capture-layout constants, precompiled
 offline structural/editor/transport validators, catalog projections and fixtures.
-Version 1.0.1 is a migration candidate; no registry publication is implied.
+Version 0.1.1 is a migration candidate; no registry publication is implied.
 
 Use the root exports for DTO types and metadata, `./validators` for transport,
 `./validators.editor` and `./validators.structural` for the other full profiles.
