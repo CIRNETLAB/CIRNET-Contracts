@@ -135,11 +135,11 @@ def generate(*, check=False, output_root=ROOT, openapi=None, node_tools=None):
                                   and not case.get('internal_only')]
             artifacts['contracts/browser/fixtures/'+path.name] = (json.dumps(value, indent=2)+'\n').encode('utf-8')
         # Corpus files without a named boundary contain only public graph,
-        # geometry or capture descriptors; retain their original fixture bytes.
+        # geometry or capture descriptors; normalize only generated handoff newlines.
         for folder in ('design-models/fixtures', 'fixtures/capture'):
             for path in (CONTRACTS/folder).glob('*.json'):
                 name = 'capture-'+path.name if folder=='fixtures/capture' else path.name
-                artifacts['contracts/browser/fixtures/'+name] = path.read_bytes()
+                artifacts['contracts/browser/fixtures/'+name] = path.read_bytes().replace(b'\r\n', b'\n')
         canonical = sorted({entry['path'] for entry in entries()} | {'contracts/profiles.json', 'contracts/manifest.json'})
         source = hashlib.sha256()
         for path in canonical:

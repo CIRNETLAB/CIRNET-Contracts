@@ -107,3 +107,25 @@ def test_sdk_gate_delegates_output_validation_before_creating_files(tmp_path):
                             env={**os.environ, 'NETCIRCUIT_ARTIFACT_PATHS_MODULE': allocator.as_uri()})
     assert result.returncode != 0 and 'ALLOCATOR_REJECTED_OUTPUT' in result.stderr
     assert not output.exists()
+
+
+def test_browser_fixture_generation_ignores_checkout_newline_conversion(tmp_path, monkeypatch):
+    import shutil
+    from contracts.codegen import generate_contracts as generator
+    copied = tmp_path / 'input' / 'contracts'
+    shutil.copytree(ROOT / 'contracts', copied, ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
+    monkeypatch.setattr(generator, 'CONTRACTS', copied)
+    fixtures = [path for folder in ('design-models/fixtures', 'fixtures/capture')
+                for path in (copied / folder).glob('*.json')]
+    assert fixtures
+    for path in fixtures:
+        path.write_bytes(path.read_bytes().replace(b'\r\n', b'\n'))
+    first, second = tmp_path / 'lf', tmp_path / 'crlf'
+    generator.generate(output_root=first, node_tools=ROOT / 'packages/public-sdk')
+    for path in fixtures:
+        path.write_bytes(path.read_bytes().replace(b'\n', b'\r\n'))
+    generator.generate(output_root=second, node_tools=ROOT / 'packages/public-sdk')
+    def contents(root):
+        return {path.relative_to(root).as_posix(): path.read_bytes()
+                for path in root.rglob('*') if path.is_file()}
+    assert contents(first) == contents(second)
