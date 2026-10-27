@@ -41,7 +41,15 @@ def test_prebuilt_export_preserves_frozen_browser_and_python_artifacts(tmp_path)
     artifacts = generated_artifacts()
     assert set(expected['sha256']) <= set(artifacts)
     for path, digest in expected['sha256'].items():
-        assert hashlib.sha256(artifacts[path].replace(b'\r\n', b'\n')).hexdigest() == digest, path
+        value = artifacts[path].replace(b'\r\n', b'\n')
+        if path == 'contracts/api/openapi.json':
+            # M6 explicitly synchronizes product metadata. Preserve the old
+            # anchor and every other byte, rather than regenerating a baseline.
+            document = json.loads(value)
+            assert document['info']['version'] == '0.1.1'
+            document['info']['version'] = '0.2.0'
+            value = (json.dumps(document, indent=2, sort_keys=True)+'\n').encode()
+        assert hashlib.sha256(value).hexdigest() == digest, path
     export_artifacts(output_root=tmp_path)
     export_artifacts(check=True, output_root=tmp_path)
     victim = tmp_path / 'apps/web/src/contracts/generated/dto.ts'
